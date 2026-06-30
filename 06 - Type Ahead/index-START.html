@@ -50,16 +50,16 @@
         `
         return;
       }
-      
-      const matches = findMatches(searchInput.value, cities);
+
+      const matches = findMatches(query, cities);
       let html;
       if (matches.length === 0) {
         html = `<li>No matches found</li>`;
       } else {
-        const regex = new RegExp(searchInput.value, 'gi');
+        const regex = new RegExp(query, 'gi');
         html = matches.map(place => {
-          const cityName = place.city.replace(regex, `<span class="hl">${searchInput.value}</span>`);
-          const stateName = place.state.replace(regex, `<span class="hl">${searchInput.value}</span>`);
+          const cityName = place.city.replace(regex, `<span class="hl">${query}</span>`);
+          const stateName = place.state.replace(regex, `<span class="hl">${query}</span>`);
           return `
           <li>
             <span class="name">${cityName}, ${stateName}</span>
