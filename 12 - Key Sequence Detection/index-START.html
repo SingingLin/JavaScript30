@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Key Detection</title>
+  <script type="text/javascript" src="./cornify.js"></script>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+
+<body>
+  <script>
+    const strArr = [];
+    const secretCode = "singing";
+    const MAX_LIMIT = secretCode.length;
+
+    window.addEventListener("keyup", (e) => {
+      console.log(e.key);
+      strArr.push(e.key);
+      if (strArr.length > MAX_LIMIT) {
+        strArr.shift();
+      }
+
+      if (strArr.join("").includes(secretCode)) {
+        console.log("DING DING!");
+        cornify_add();
+      }
+      console.log(strArr);
+    });
+  </script>
+</body>
+
+</html>
