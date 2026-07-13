@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mouse Shadow</title>
+    <link rel="icon" href="https://fav.farm/🔥" />
+  </head>
+  <body>
+    <div class="hero">
+      <h1 contenteditable>🔥WOAH!</h1>
+    </div>
+
+    <style>
+      html {
+        color: black;
+        font-family: sans-serif;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+      }
+
+      h1 {
+        text-shadow: 10px 10px 0 rgba(0, 0, 0, 1);
+        font-size: 100px;
+      }
+    </style>
+
+    <script>
+      const h1 = document.querySelector("h1");
+
+      window.addEventListener("mousemove", (e) => {
+        // 1. 取得 H1 中心點
+        const rect = h1.getBoundingClientRect();
+        const h1X = rect.left + rect.width / 2;
+        const h1Y = rect.top + rect.height / 2;
+
+        // 2. 計算滑鼠與中心點的基本基礎位移量 (除以 20 限制最大範圍)
+        const baseX = (e.clientX - h1X) / 20;
+        const baseY = (e.clientY - h1Y) / 20;
+
+        // 3. 用陣列儲存 5 個陰影的設定
+        const shadowArray = [];
+
+        // 4. 迴圈計算 5 個陰影的數字
+        for (let i = 1; i <= 5; i++) {
+          const shadowX = baseX * i;
+          const shadowY = baseY * i;
+          const blur = i * 5;
+
+          // 顏色：利用 i 改變色相 (HSL)。每層差距 40 度，產生色彩漸變
+          // 同時隨滑鼠移動 (baseX) 讓顏色本身也會動態微調
+          const hue = (i * 40 + Math.abs(baseX * 2)) % 360;
+          const color = `hsl(${hue}, 80%, 60%)`;
+
+          shadowArray.push(`${shadowX}px ${shadowY}px ${blur}px ${color}`);
+        }
+
+        h1.style.textShadow = shadowArray.join(", ");
+      });
+    </script>
+  </body>
+</html>
